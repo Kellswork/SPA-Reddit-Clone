@@ -1,20 +1,24 @@
 import axios from "axios";
-import {actionType} from './types'
 
+export const ActionType = {
+  IS_FETCHING_POSTS: "IS_FETCHING_POSTS",
+  FETCH_POSTS_FAILURE: "FETCH_POSTS_FAILURE",
+  FETCH_POSTS_SUCCESS: "FETCH_POSTS_SUCCESS",
+};
 
 export const isFetchingPost = (status) => ({
-  type: actionType.FETCH_POSTS_REQUEST,
-  status,
+  type: ActionType.IS_FETCHING_POSTS,
+  payload: status,
 });
 
 export const successPosts = (posts) => ({
-  type: actionType.FETCH_POSTS_SUCCESS,
-  posts,
+  type: ActionType.FETCH_POSTS_SUCCESS,
+  payload: posts,
 });
 
-export const failurePosts = (error) => ({
-  type: actionType.FETCH_POSTS_REQUEST,
-  error,
+export const setFetchPostsErrors = (error) => ({
+  type: ActionType.IS_FETCHING_POSTS,
+  payload: error,
 });
 
 export const fetchPosts = () => (dispatch) => {
@@ -22,14 +26,15 @@ export const fetchPosts = () => (dispatch) => {
   return axios
     .get("https://www.reddit.com/.json")
     .then((res) => {
-      console.log(res.data.data.children);
-      const response = res.data.data.children
-      dispatch(successPosts(response));
+      console.log('res.data', res.data.data.children);
+      dispatch(successPosts(res.data.data.children));
+      
+      // dispatch(successPosts(formattedData));
       return res.data;
     })
     .catch((error) => {
       console.log(error);
-      dispatch(failurePosts(error));
+      // dispatch(error);
     })
     .finally(() => {
       dispatch(isFetchingPost(false));
