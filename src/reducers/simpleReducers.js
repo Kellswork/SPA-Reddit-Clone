@@ -1,4 +1,4 @@
-import {ActionType} from '../actions'
+import { actionType } from '../actions/types'
 
 const initialState = {
   isFetching: false,
@@ -8,18 +8,18 @@ const initialState = {
 
 const simpleReducer = (state=initialState, action) => {
   switch ( action.type) {
-    case ActionType.FETCH_POSTS_REQUEST:
+    case actionType.FETCH_POSTS_REQUEST:
       return {
         ...state,
         isFetching: true
       }
-      case ActionType.FETCH_POSTS_SUCCESS:
+      case actionType.FETCH_POSTS_SUCCESS:
       return {
         ...state,
         isFetching: false,
         posts: action.payload
       }
-      case ActionType.FETCH_POSTS_FAILURE:
+      case actionType.FETCH_POSTS_FAILURE:
       return {
         ...state,
         isFetching: false,
@@ -29,10 +29,5 @@ const simpleReducer = (state=initialState, action) => {
         return state
   }
 }
-
-// they are called selectors
-export const fetchedPosts = state =>  state.posts
-export const isFetchingPosts = state =>  state.isFetching
-export const fetchPostsError = state =>  state.error
 
 export default simpleReducer

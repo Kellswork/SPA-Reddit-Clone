@@ -1,29 +1,31 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchPosts } from "../actions";
-import { bindActionCreators } from 'redux';
-import {
-  fetchedPosts,
-  fetchPostsError,
-  isFetchingPosts,
-} from "../reducers/simpleReducers";
+import SubredditPost from './SubredditPost'
 
-function Posts() {
+
+function Posts(props) {
   useEffect(() => {
-    fetchPosts();
-    console.log(fetchedPosts())
+    props.fetchPosts();
+    console.log('posts', props.posts)
+    //  console.log('posts', props.fetchPosts())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return <div>hello</div>;
+
+  console.log('posts', props.posts)
+  return <div>
+      {/* {props.posts.map((post) => <SubredditPost post={post} /> )} */}
+  </div>;
 }
 
-const mapStateToProps = state => ({
-//    isFetching: isFetchingPosts(state),
+const mapStateToProps = state => {
+  console.log('mapstatetoprops', state);
+  return {
+   isFetching: state.isFetching,
    posts: state.posts,
-//    error: fetchPostsError(state)
-})
+   error: state.error
+};
+}
 
-// const mapDispatchToProps = dispatch => bindActionCreators({
-//     fetchPosts: fetchPosts(),
-// }, dispatch)
-// export default Posts;
+
 export default connect(mapStateToProps, {fetchPosts})(Posts)
