@@ -25,7 +25,6 @@ const LinkIcon = () => (
 function SubredditPost(props) {
   const postTime = moment.unix(props.post.data.created_utc).fromNow();
   const urlLink = `https://www.reddit.com${props.post.data.permalink}`;
-  console.log(urlLink);
   return (
     <>
       <ContentCard>
@@ -52,7 +51,7 @@ function SubredditPost(props) {
                 url={props.post.data.url}
               />
               <a
-                class="reddit-link"
+                className="reddit-link"
                 href={urlLink}
                 target="_blank"
                 rel="noopener noreferrer"

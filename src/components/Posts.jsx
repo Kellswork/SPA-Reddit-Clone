@@ -9,9 +9,6 @@ function Posts(props) {
   useEffect(() => {
     props.fetchPosts();
   }, []);
-
-  console.log("Posts-->", props);
-
   return (
     <>
       <Nav />
