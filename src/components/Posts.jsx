@@ -1,16 +1,23 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { fetchPosts } from '../actions';
-import SubredditPost from './SubredditPost'
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchPosts } from "../actions";
+import SubredditPost from "./SubredditPost";
+import { MainContainer } from "./~styled";
 
 function Posts(props) {
   useEffect(() => {
     props.fetchPosts();
   }, []);
 
-  console.log('Posts-->', props);
+  console.log("Posts-->", props);
 
-return <div>{props.posts.map((post) => <SubredditPost post={post} /> )}</div>;
+  return (
+    <MainContainer>
+      {props.posts.map((post) => (
+        <SubredditPost post={post} />
+      ))}
+    </MainContainer>
+  );
 }
 
 const mapStateToProps = (state) => ({
