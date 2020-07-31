@@ -43,6 +43,21 @@ const postsReducer = (state = initialState, action) => {
           };
         })
       };
+    case ActionType.FILTER_BY_POPULARITY:
+      return {
+        ...state,
+        posts: state.posts.sort((a, b) => b.ups * 1 - a.ups * 1)
+      };
+    case ActionType.FILTER_BY_DATE_DESC:
+      return {
+        ...state,
+        posts: state.posts.sort((a, b) => a.created_utc - b.created_utc)
+      };
+    case ActionType.FILTER_BY_DATE_ASC:
+      return {
+        ...state,
+        posts: state.posts.sort((a, b) => b.created_utc - a.created_utc)
+      };
     default:
       return state;
   }

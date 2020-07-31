@@ -3,8 +3,19 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
   background-color: #dae0e6;
   width: 100%;
+  height: 100%;
   padding-top: 20px;
-  font-family: "Inter", sans-serif;
+  font-family: "Roboto", sans-serif;
+`;
+export const LoaderContainer = styled.div`
+background-color: #dae0e6;
+  width: 100%;
+  height: 100vh;
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
 `;
 
 export const ContentCard = styled.div`
@@ -13,6 +24,12 @@ export const ContentCard = styled.div`
   max-width: 600px;
   width: 100%;
   /* height: 300px; */
+  @media (max-width: 640px) {
+    width: 90%;
+    h3 {
+        font-size: 1 rem;
+    }
+  }
   margin: 0 auto;
   margin-bottom: 20px;
   border-radius: 4px;
@@ -73,16 +90,15 @@ export const ContentCard = styled.div`
     .react_tinylink_card_media {
       border-radius: 2px;
     }
-    
-      .reddit-link {
-        text-decoration: none;
-        font-size: 0.8rem;
-        font-style: italic;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        padding-top: 10px;
-      }
-     
+
+    .reddit-link {
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-style: italic;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      padding-top: 10px;
+    }
   }
 `;

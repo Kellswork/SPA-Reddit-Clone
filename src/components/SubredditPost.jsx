@@ -4,6 +4,7 @@ import { ContentCard } from "./~styled";
 import moment from "moment";
 import { ReactTinyLink } from "react-tiny-link";
 
+
 function kFormatter(num) {
   return Math.abs(num) > 999
     ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
