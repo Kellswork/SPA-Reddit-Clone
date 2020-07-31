@@ -23,32 +23,30 @@ const LinkIcon = () => (
 );
 
 function SubredditPost(props) {
-  const postTime = moment.unix(props.post.data.created_utc).fromNow();
-  const urlLink = `https://www.reddit.com${props.post.data.permalink}`;
+  const postTime = moment.unix(props.post.created_utc).fromNow();
+  const urlLink = `https://www.reddit.com${props.post.permalink}`;
   return (
     <>
       <ContentCard>
         <div className="upvotes">
-          <p>{kFormatter(props.post.data.ups)}</p>
+          <p>{kFormatter(props.post.ups)}</p>
         </div>
         <div className="content-right">
           <div className="card-top">
-            <p className="sub-heading">
-              {props.post.data.subreddit_name_prefixed}
-            </p>
-            <p>Posted by u/{props.post.data.author}</p>
+            <p className="sub-heading">{props.post.subreddit_name_prefixed}</p>
+            <p>Posted by u/{props.post.author}</p>
             <p>{postTime}</p>
           </div>
           <div className="post-details">
-            <h3>{props.post.data.title}</h3>
-            {/* <p>{props.post.data.url}</p> */}
+            <h3>{props.post.title}</h3>
+            {/* <p>{props.post.url}</p> */}
             <div className="post-link">
               <ReactTinyLink
                 cardSize="small"
                 showGraphic={true}
                 maxLine={2}
                 minLine={1}
-                url={props.post.data.url}
+                url={props.post.url}
               />
               <a
                 className="reddit-link"
@@ -69,8 +67,6 @@ function SubredditPost(props) {
   );
 }
 
-SubredditPost.propTypes = {
-    
-};
+SubredditPost.propTypes = {};
 
 export default SubredditPost;

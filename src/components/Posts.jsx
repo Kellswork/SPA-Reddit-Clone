@@ -1,37 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { fetchPosts } from "../actions";
+import { fetchPosts, searchPosts } from "../actions";
 import SubredditPost from "./SubredditPost";
 import { MainContainer } from "./~styled";
 import Nav from "./Nav";
 
 function Posts(props) {
-  const [input, updateInput] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     props.fetchPosts();
   }, []);
 
-  const handleChange = (event) => {
-    updateInput({ input: event.target.value });
+  useEffect(() => {
+    props.searchPosts(searchTerm);
+  }, [searchTerm]);
+
+  const handleSearchChange = event => {
+    setSearchTerm(event.target.value);
   };
 
   return (
     <>
-      <Nav input={input} handleChange={handleChange} />
+      <Nav searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
       <MainContainer>
-        {props.posts.map((post) => (
-          <SubredditPost post={post} key={post.data.title} />
-        ))}
+        {props.posts
+          .filter(item => item.displaying)
+          .map(post => (
+            <SubredditPost post={post} key={post.title} />
+          ))}
       </MainContainer>
     </>
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isFetching: state.posts.isFetching,
   posts: state.posts.posts,
-  error: state.posts.error,
+  error: state.posts.error
 });
 
-export default connect(mapStateToProps, { fetchPosts })(Posts);
+export default connect(
+  mapStateToProps,
+  { fetchPosts, searchPosts }
+)(Posts);

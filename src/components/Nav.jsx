@@ -1,7 +1,7 @@
 import React from "react";
 import { NavContainer } from "./~styled/Nav";
 
-function Nav({ posts, handleChange, input }) {
+function Nav({ handleSearchChange, searchTerm }) {
   return (
     <NavContainer>
       <div className="search-box">
@@ -10,8 +10,8 @@ function Nav({ posts, handleChange, input }) {
             type="text"
             name="search"
             placeholder="Search"
-            value={input}
-            onChange={handleChange}
+            value={searchTerm}
+            onChange={handleSearchChange}
           />
         </label>
       </div>
