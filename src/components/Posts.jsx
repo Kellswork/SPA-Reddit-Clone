@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchPosts, searchPosts, filterAllPosts } from "../actions";
-import SubredditPost from "./SubredditPost";
+import Post from "./Post";
 import { MainContainer, LoaderContainer } from "./~styled";
 import Nav from "./Nav";
 import FilterPosts from "./FilterPosts";
@@ -54,7 +54,7 @@ function Posts(props) {
         {displayPosts
           .filter((item) => item.displaying)
           .map((post) => (
-            <SubredditPost post={post} key={post.title} />
+            <Post post={post} key={post.title} />
           ))}
       </MainContainer>
     </>

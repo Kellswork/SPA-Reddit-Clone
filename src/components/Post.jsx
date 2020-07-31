@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ContentCard } from "./~styled";
 import moment from "moment";
 import { ReactTinyLink } from "react-tiny-link";
-
+import { Link } from "react-router-dom";
 
 function kFormatter(num) {
   return Math.abs(num) > 999
@@ -23,7 +23,7 @@ const LinkIcon = () => (
   </svg>
 );
 
-function SubredditPost(props) {
+function Post(props) {
   const postTime = moment.unix(props.post.created_utc).fromNow();
   const urlLink = `https://www.reddit.com${props.post.permalink}`;
   return (
@@ -34,13 +34,19 @@ function SubredditPost(props) {
         </div>
         <div className="content-right">
           <div className="card-top">
-            <p className="sub-heading">{props.post.subreddit_name_prefixed}</p>
+            <p>
+              <Link
+                to={props.post.subreddit_name_prefixed}
+                className="sub-heading"
+              >
+                {props.post.subreddit_name_prefixed}
+              </Link>
+            </p>
             <p>Posted by u/{props.post.author}</p>
             <p>{postTime}</p>
           </div>
           <div className="post-details">
             <h3>{props.post.title}</h3>
-            {/* <p>{props.post.url}</p> */}
             <div className="post-link">
               <ReactTinyLink
                 cardSize="small"
@@ -68,6 +74,6 @@ function SubredditPost(props) {
   );
 }
 
-SubredditPost.propTypes = {};
+Post.propTypes = {};
 
-export default SubredditPost;
+export default Post;

@@ -67,16 +67,19 @@ export const ContentCard = styled.div`
   }
   .sub-heading {
     font-weight: bold;
+    color: #323F4B;
+    text-decoration: none;
   }
   .post-details {
     h3 {
       font-weight: bold;
       font-size: 1.1rem;
       padding-bottom: 10px;
+      color: #323F4B;
     }
     p {
       font-size: 0.9rem;
-      color: grey;
+      color: #323F4B;
     }
     .react_tinylink_card {
       background-color: inherit;
