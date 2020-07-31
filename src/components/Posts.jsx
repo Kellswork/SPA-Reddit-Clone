@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchPosts, searchPosts, filterAllPosts } from "../actions";
 import Post from "./Post";
-import { MainContainer, LoaderContainer } from "./~styled";
+import { MainContainer, LoaderContainer, FilterStyles } from "./~styled";
 import Nav from "./Nav";
 import FilterPosts from "./FilterPosts";
 import Loader from "react-loader-spinner";
@@ -48,7 +48,10 @@ function Posts(props) {
     <>
       <Nav searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
 
-      <FilterPosts filterBy={filterBy} setFilterBy={setFilterBy} />
+      <FilterStyles>
+        <FilterPosts filterBy={filterBy} setFilterBy={setFilterBy} />
+      </FilterStyles>
+      
       <MainContainer>
         {displayPosts
           .filter((item) => item.displaying)

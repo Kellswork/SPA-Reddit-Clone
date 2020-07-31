@@ -1,6 +1,8 @@
 import React from "react";
 import { NavContainer } from "./~styled/Nav";
 
+
+
 function Nav({ handleSearchChange, searchTerm }) {
   return (
     <NavContainer>
