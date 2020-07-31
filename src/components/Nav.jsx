@@ -1,15 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavContainer } from "./~styled/Nav";
-import { connect } from "react-redux";
 
-
-function Nav({ posts }) {
-  const [input, updateInput] = useState("");
-
-  const handleChange = (event) => {
-    updateInput({ input: event.target.value });
-  };
-
+function Nav({ posts, handleChange, input }) {
   return (
     <NavContainer>
       <div className="search-box">
@@ -18,6 +10,7 @@ function Nav({ posts }) {
             type="text"
             name="search"
             placeholder="Search"
+            value={input}
             onChange={handleChange}
           />
         </label>
@@ -25,8 +18,5 @@ function Nav({ posts }) {
     </NavContainer>
   );
 }
-const mapStateToProps = (state) => ({
-  posts: state.posts.posts,
-});
 
-export default connect(mapStateToProps, {})(Nav);
+export default Nav;
