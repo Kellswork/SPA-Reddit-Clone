@@ -1,12 +1,14 @@
-import React from 'react'
+import React from "react";
+import { NavContainer } from "./~styled/Nav";
 
 export default function Nav() {
-    return (
-        <div>
-            <div className='filter-box'>
-            
-            </div>
-            <div className='search-box'></div>
-        </div>
-    )
+  return (
+    <NavContainer>
+      <div className="search-box">
+        <label htmlFor="search">
+          <input type="text"  placeholder='Search'/>
+        </label>
+      </div>
+    </NavContainer>
+  );
 }

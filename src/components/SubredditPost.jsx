@@ -27,39 +27,46 @@ function SubredditPost(props) {
   const urlLink = `https://www.reddit.com${props.post.data.permalink}`;
   console.log(urlLink);
   return (
-    <ContentCard>
-      <div className="upvotes">
-        <p>{kFormatter(props.post.data.ups)}</p>
-      </div>
-      <div className="content-right">
-        <div className="card-top">
-          <p className="sub-heading">
-            {props.post.data.subreddit_name_prefixed}
-          </p>
-          <p>Posted by u/{props.post.data.author}</p>
-          <p>{postTime}</p>
+    <>
+      <ContentCard>
+        <div className="upvotes">
+          <p>{kFormatter(props.post.data.ups)}</p>
         </div>
-        <div className="post-details">
-          <h3>{props.post.data.title}</h3>
-          {/* <p>{props.post.data.url}</p> */}
-          <div className="post-link">
-            <ReactTinyLink
-              cardSize="small"
-              showGraphic={true}
-              maxLine={2}
-              minLine={1}
-              url={props.post.data.url}
-            />
-            <a class='reddit-link' href={urlLink} target="_blank" rel="noopener noreferrer">
-              link to post
-              <span>
-                <LinkIcon />
-              </span>
-            </a>
+        <div className="content-right">
+          <div className="card-top">
+            <p className="sub-heading">
+              {props.post.data.subreddit_name_prefixed}
+            </p>
+            <p>Posted by u/{props.post.data.author}</p>
+            <p>{postTime}</p>
+          </div>
+          <div className="post-details">
+            <h3>{props.post.data.title}</h3>
+            {/* <p>{props.post.data.url}</p> */}
+            <div className="post-link">
+              <ReactTinyLink
+                cardSize="small"
+                showGraphic={true}
+                maxLine={2}
+                minLine={1}
+                url={props.post.data.url}
+              />
+              <a
+                class="reddit-link"
+                href={urlLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                link to post
+                <span>
+                  <LinkIcon />
+                </span>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </ContentCard>
+      </ContentCard>
+    </>
   );
 }
 
