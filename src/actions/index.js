@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setupCache } from 'axios-cache-adapter'
+import { setupCache } from "axios-cache-adapter";
 
 export const ActionType = {
   IS_FETCHING_POSTS: "IS_FETCHING_POSTS",
@@ -9,7 +9,8 @@ export const ActionType = {
   FILTER_ALL_POSTS: "FILTER_ALL_POSTS",
   FILTER_BY_DATE_ASC: "FILTER_BY_DATE_ASC",
   FILTER_BY_DATE_DESC: "FILTER_BY_DATE_DESC",
-  FILTER_BY_UPVOTES: "FILTER_BY_UPVOTES"
+  FILTER_BY_UPVOTES: "FILTER_BY_UPVOTES",
+  FETCH_POSTS_ON_SUBREDDIT: "FETCH_POSTS_ON_SUBREDDIT"
 };
 
 export const isFetchingPost = status => ({
@@ -30,6 +31,11 @@ export const setFetchPostsErrors = error => ({
 export const searchPosts = searchTerm => ({
   type: ActionType.SEARCH_POSTS,
   payload: searchTerm
+});
+
+export const fetchSubRedditPosts = sub => ({
+  type: ActionType.FETCH_POSTS_ON_SUBREDDIT,
+  payload: `r/${sub}`
 });
 
 export const filterByDateAsc = () => ({
@@ -62,17 +68,18 @@ export const filterAllPosts = filterBy => dispatch => {
 
 const cache = setupCache({
   maxAge: 15 * 60 * 1000
-})
- 
+});
+
 const api = axios.create({
   adapter: cache.adapter
-})
+});
 
 export const fetchPosts = () => dispatch => {
   dispatch(isFetchingPost(true));
   return api
     .get("https://www.reddit.com/.json")
-    .then(async(res) => {
+    .then(async res => {
+      console.log("res.data", res.data.data.children);
 
       const formattedPostsData = res.data.data.children.map(({ data }) => ({
         title: data.title,
@@ -85,11 +92,13 @@ export const fetchPosts = () => dispatch => {
       }));
 
       dispatch(successPosts(formattedPostsData));
-      
- 
+      const length = await cache.store.length();
+
+      console.log("Cache store length:", length);
       return res.data;
     })
     .catch(error => {
+      console.log(error);
     })
     .finally(() => {
       dispatch(isFetchingPost(false));

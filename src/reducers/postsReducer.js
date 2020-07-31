@@ -25,6 +25,12 @@ const postsReducer = (state = initialState, action) => {
         isFetching: false,
         posts: action.payload
       };
+    case ActionType.FETCH_POSTS_ON_SUBREDDIT:
+      console.log('fds', action.payload);
+      return {
+        ...state,
+        posts: state.posts.filter(p => p.subreddit_name_prefixed === action.payload)
+      };
     case ActionType.SEARCH_POSTS:
       return {
         ...state,
