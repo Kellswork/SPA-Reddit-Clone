@@ -43,7 +43,7 @@ const postsReducer = (state = initialState, action) => {
           };
         })
       };
-    case ActionType.FILTER_BY_POPULARITY:
+    case ActionType.FILTER_BY_UPVOTES:
       return {
         ...state,
         posts: state.posts.sort((a, b) => b.ups * 1 - a.ups * 1)

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setupCache } from 'axios-cache-adapter'
 
 export const ActionType = {
   IS_FETCHING_POSTS: "IS_FETCHING_POSTS",
@@ -8,7 +9,7 @@ export const ActionType = {
   FILTER_ALL_POSTS: "FILTER_ALL_POSTS",
   FILTER_BY_DATE_ASC: "FILTER_BY_DATE_ASC",
   FILTER_BY_DATE_DESC: "FILTER_BY_DATE_DESC",
-  FILTER_BY_POPULARITY: "FILTER_BY_POPULARITY"
+  FILTER_BY_UPVOTES: "FILTER_BY_UPVOTES"
 };
 
 export const isFetchingPost = status => ({
@@ -40,7 +41,7 @@ export const filterByDateDesc = () => ({
 });
 
 export const filterByPopularity = () => ({
-  type: ActionType.FILTER_BY_POPULARITY
+  type: ActionType.FILTER_BY_UPVOTES
 });
 
 export const filterAllPosts = filterBy => dispatch => {
@@ -59,11 +60,19 @@ export const filterAllPosts = filterBy => dispatch => {
   }
 };
 
+const cache = setupCache({
+  maxAge: 15 * 60 * 1000
+})
+ 
+const api = axios.create({
+  adapter: cache.adapter
+})
+
 export const fetchPosts = () => dispatch => {
   dispatch(isFetchingPost(true));
-  return axios
+  return api
     .get("https://www.reddit.com/.json")
-    .then(res => {
+    .then(async(res) => {
       console.log("res.data", res.data.data.children);
 
       const formattedPostsData = res.data.data.children.map(({ data }) => ({
@@ -77,7 +86,9 @@ export const fetchPosts = () => dispatch => {
       }));
 
       dispatch(successPosts(formattedPostsData));
-
+      const length = await cache.store.length()
+ 
+      console.log('Cache store length:', length)
       return res.data;
     })
     .catch(error => {
