@@ -10,7 +10,8 @@ export const MainContainer = styled.div`
 export const ContentCard = styled.div`
   background-color: white;
   font-family: "Roboto", sans-serif;
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
   /* height: 300px; */
   margin: 0 auto;
   margin-bottom: 20px;
@@ -19,7 +20,8 @@ export const ContentCard = styled.div`
   display: flex;
   .upvotes {
     background-color: #f7f9fa;
-    width: 44px;
+    min-width: 44px;
+    padding-top: 4px;
     p {
       padding: 8px 4px 8px 4px;
       font-size: 0.85rem;
@@ -71,5 +73,16 @@ export const ContentCard = styled.div`
     .react_tinylink_card_media {
       border-radius: 2px;
     }
+    
+      .reddit-link {
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-style: italic;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        padding-top: 10px;
+      }
+     
   }
 `;
