@@ -45,7 +45,22 @@ function Post(props) {
             <p>{postTime}</p>
           </div>
           <div className="post-details">
-            <h3>{props.post.title}</h3>
+            <h3>
+              {props.post.title}{" "}
+              <span>
+                <a
+                  className="reddit-link"
+                  href={urlLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  link to post
+                  <span>
+                    <LinkIcon />
+                  </span>
+                </a>
+              </span>
+            </h3>
             <div className="post-link">
               <ReactTinyLink
                 cardSize="small"
@@ -54,17 +69,6 @@ function Post(props) {
                 minLine={1}
                 url={props.post.url}
               />
-              <a
-                className="reddit-link"
-                href={urlLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                link to post
-                <span>
-                  <LinkIcon />
-                </span>
-              </a>
             </div>
           </div>
         </div>
@@ -72,6 +76,5 @@ function Post(props) {
     </>
   );
 }
-
 
 export default Post;

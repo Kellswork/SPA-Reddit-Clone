@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import Nav from './Nav'
 
 import { useParams } from 'react-router-dom';
 import { fetchSubRedditPosts, fetchPosts } from '../actions';
 import { connect } from 'react-redux';
-import { MainContainer } from './~styled';
+import {  SubContainer } from './~styled';
 import Post from './Post';
 
 function SubredditPosts(props) {
@@ -15,16 +16,17 @@ function SubredditPosts(props) {
   }, []);
 
   return (
-    <div>
-      <h2>{params.subReddit}</h2>
-      <MainContainer>
+    <SubContainer >
+        <Nav />
+        <h2>{params.subReddit}</h2>
+      <div>
         {props.posts
           .filter((item) => item.displaying)
           .map((post) => (
             <Post post={post} key={post.title} />
           ))}
-      </MainContainer>
-    </div>
+      </div>
+    </SubContainer>
   );
 }
 const mapStateToProps = (state) => ({
