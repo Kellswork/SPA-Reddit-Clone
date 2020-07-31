@@ -1,21 +1,19 @@
 import React from "react";
 import Posts from "./components/Posts";
 import SubredditPosts from './components/SubredditPosts'
-
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Switch>
-        <Route path="/">
+      <Switch>
+        <Route exact path="/">
           <Posts />
         </Route>
-        <Route path="/test/:subreddit">
+        <Route path="/r/:subReddit">
           <SubredditPosts />
         </Route>
-        </Switch>
-      </div>
+      </Switch>
     </Router>
   );
 }
