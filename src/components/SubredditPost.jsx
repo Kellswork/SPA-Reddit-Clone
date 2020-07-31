@@ -69,6 +69,8 @@ function SubredditPost(props) {
   );
 }
 
-SubredditPost.propTypes = {};
+SubredditPost.propTypes = {
+    
+};
 
 export default SubredditPost;
