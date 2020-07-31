@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { ContentCard } from "./~styled";
 import moment from "moment";
 import { ReactTinyLink } from "react-tiny-link";
@@ -74,6 +73,5 @@ function Post(props) {
   );
 }
 
-Post.propTypes = {};
 
 export default Post;

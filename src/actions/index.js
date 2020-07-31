@@ -73,7 +73,6 @@ export const fetchPosts = () => dispatch => {
   return api
     .get("https://www.reddit.com/.json")
     .then(async(res) => {
-      console.log("res.data", res.data.data.children);
 
       const formattedPostsData = res.data.data.children.map(({ data }) => ({
         title: data.title,
@@ -86,13 +85,11 @@ export const fetchPosts = () => dispatch => {
       }));
 
       dispatch(successPosts(formattedPostsData));
-      const length = await cache.store.length()
+      
  
-      console.log('Cache store length:', length)
       return res.data;
     })
     .catch(error => {
-      console.log(error);
     })
     .finally(() => {
       dispatch(isFetchingPost(false));

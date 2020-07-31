@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchPosts, searchPosts, filterAllPosts } from "../actions";
@@ -17,7 +18,6 @@ function Posts(props) {
   }, []);
 
   useEffect(() => {
-    console.log({ filterBy });
     if (filterBy.length > 0) {
       props.fetchPosts().then(() => props.filterAllPosts(filterBy));
     }
@@ -34,7 +34,6 @@ function Posts(props) {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-  console.log({ displayPosts });
   return props.isFetching ? (
     <LoaderContainer>
       <Loader
