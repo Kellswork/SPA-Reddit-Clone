@@ -56,7 +56,7 @@ function Posts(props) {
         {displayPosts
           .filter((item) => item.displaying)
           .map((post) => (
-            <Post post={post} key={post.title} />
+            <Post post={post} key={post.permalink} />
           ))}
       </MainContainer>
     </>

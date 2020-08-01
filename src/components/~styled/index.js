@@ -35,6 +35,7 @@ export const LoaderContainer = styled.div`
 export const FilterStyles = styled.div`
   display: flex;
   justify-content: center;
+  font-family: "Roboto", sans-serif;
   align-items: center;
   padding-top: 10px;
   background: rgba(0,0,0,0.04);

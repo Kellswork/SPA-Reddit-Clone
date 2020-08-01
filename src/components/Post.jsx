@@ -58,7 +58,7 @@ function Post(props) {
                 showGraphic={true}
                 maxLine={2}
                 minLine={1}
-                url={props.post.url}
+                url={urlLink}
               />
             </div>
           </div>

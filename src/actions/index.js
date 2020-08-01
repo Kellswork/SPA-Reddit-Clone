@@ -10,47 +10,47 @@ export const ActionType = {
   FILTER_BY_DATE_ASC: "FILTER_BY_DATE_ASC",
   FILTER_BY_DATE_DESC: "FILTER_BY_DATE_DESC",
   FILTER_BY_UPVOTES: "FILTER_BY_UPVOTES",
-  FETCH_POSTS_ON_SUBREDDIT: "FETCH_POSTS_ON_SUBREDDIT"
+  FETCH_POSTS_ON_SUBREDDIT: "FETCH_POSTS_ON_SUBREDDIT",
 };
 
-export const isFetchingPost = status => ({
+export const isFetchingPost = (status) => ({
   type: ActionType.IS_FETCHING_POSTS,
-  payload: status
+  payload: status,
 });
 
-export const successPosts = posts => ({
+export const successPosts = (posts) => ({
   type: ActionType.FETCH_POSTS_SUCCESS,
-  payload: posts
+  payload: posts,
 });
 
-export const setFetchPostsErrors = error => ({
+export const setFetchPostsErrors = (error) => ({
   type: ActionType.IS_FETCHING_POSTS,
-  payload: error
+  payload: error,
 });
 
-export const searchPosts = searchTerm => ({
+export const searchPosts = (searchTerm) => ({
   type: ActionType.SEARCH_POSTS,
-  payload: searchTerm
+  payload: searchTerm,
 });
 
-export const fetchSubRedditPosts = sub => ({
+export const fetchSubRedditPosts = (sub) => ({
   type: ActionType.FETCH_POSTS_ON_SUBREDDIT,
-  payload: `r/${sub}`
+  payload: `r/${sub}`,
 });
 
 export const filterByDateAsc = () => ({
-  type: ActionType.FILTER_BY_DATE_ASC
+  type: ActionType.FILTER_BY_DATE_ASC,
 });
 
 export const filterByDateDesc = () => ({
-  type: ActionType.FILTER_BY_DATE_DESC
+  type: ActionType.FILTER_BY_DATE_DESC,
 });
 
 export const filterByPopularity = () => ({
-  type: ActionType.FILTER_BY_UPVOTES
+  type: ActionType.FILTER_BY_UPVOTES,
 });
 
-export const filterAllPosts = filterBy => dispatch => {
+export const filterAllPosts = (filterBy) => (dispatch) => {
   switch (filterBy) {
     case "newest":
       dispatch(filterByDateAsc());
@@ -67,37 +67,33 @@ export const filterAllPosts = filterBy => dispatch => {
 };
 
 const cache = setupCache({
-  maxAge: 15 * 60 * 1000
+  maxAge: 15 * 60 * 1000,
 });
 
 const api = axios.create({
-  adapter: cache.adapter
+  adapter: cache.adapter,
 });
 
-export const fetchPosts = () => dispatch => {
+export const fetchPosts = () => (dispatch) => {
   dispatch(isFetchingPost(true));
   return api
     .get("https://www.reddit.com/.json")
-    .then(async res => {
-      console.log("res.data", res.data.data.children);
-
+    .then(async (res) => {
       const formattedPostsData = res.data.data.children.map(({ data }) => ({
         title: data.title,
         author: data.author,
         url: data.url,
+        permalink: data.permalink,
         created_utc: data.created_utc,
         ups: data.ups,
         subreddit_name_prefixed: data.subreddit_name_prefixed,
-        displaying: true
+        displaying: true,
       }));
 
       dispatch(successPosts(formattedPostsData));
-      const length = await cache.store.length();
-
-      console.log("Cache store length:", length);
       return res.data;
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     })
     .finally(() => {
