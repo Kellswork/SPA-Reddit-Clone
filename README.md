@@ -11,14 +11,10 @@
   - Link to actual reddit post
 
 ### Technology Used
+React - UI library
+Redux - for state management
 
-Redux
-
-- for state management
-
-Axios cache adapter
-
-- to implement client side caching
+Axios cache adapter - to implement client side caching
 
 ### Hosting
 
