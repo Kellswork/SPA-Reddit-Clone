@@ -1,5 +1,3 @@
-# This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Required Features
 
 - Users should be able to see the app showing lists of posts grouped by their subreddit.
