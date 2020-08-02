@@ -12,6 +12,7 @@
 
 ### Technology Used
 React - UI library
+
 Redux - for state management
 
 Axios cache adapter - to implement client side caching
